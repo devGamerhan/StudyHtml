@@ -11,26 +11,26 @@
 						http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 						
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<context:component-scan base-package="com.example.biz"></context:component-scan>
-	<context:component-scan base-package="com.example.common"></context:component-scan>
+ 	<context:component-scan base-package="com.example.biz"></context:component-scan>
 	
-		
+	
 	<!-- 데이터 소스 설정 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> <!-- ${jdbc.driver} -->
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>				<!-- ${jdbc.url} -->
-		<property name="username" value="system"></property>	<!-- ${jdbc.username} -->
-		<property name="password" value="1234"></property>	<!-- ${jdbc.password} -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">	<!-- destroy-method="close" -->
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="system"></property>
+		<property name="password" value="1234"></property>
 	</bean>
-	
+
+
 	<!-- mybatis 설정 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation" value="classpath:sql-map-config.xml"></property>
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:sql-map-config.xml" />
 	</bean>
 	
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSession"></constructor-arg>
+		<constructor-arg ref="sqlSession" />
 	</bean>
-	
+
 </beans>

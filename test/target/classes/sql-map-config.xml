@@ -5,13 +5,14 @@
 <configuration>
 
   <typeAliases>
-  	<typeAlias alias="board" type="com.example.biz.board.BoardVO"/>
-  	<typeAlias alias="user" type="com.example.biz.user.UserVO"/>
+  	<typeAlias alias="schaduleBoard" type="com.example.biz.board.SchaduleBoardVO"/>
+  	<typeAlias alias="vacationBoard" type="com.example.biz.board.VacationBoardVO"/>
+  	<typeAlias alias="user" 		 type="com.example.biz.user.UserVO"/>
   </typeAliases>
   
-  <mappers>
-  	<mapper resource="mappings/board-mapping.xml" />
-  	<mapper resource="mappings/user-mapping.xml" />
-  </mappers>
+<!--   <mappers> -->
+<!--   	<mapper resource="mappings/board-mapping.xml" /> -->
+<!--   	<mapper resource="mappings/user-mapping.xml" /> -->
+<!--   </mappers> -->
   
 </configuration>
