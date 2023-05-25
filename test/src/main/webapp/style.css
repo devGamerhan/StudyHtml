@@ -408,7 +408,8 @@ legend {
   font-weight: 600; }
 fieldset {
   padding: 0;
-  border-width: 0; }
+  border-width: 0;
+  border: 1px solid black }
 input[type="checkbox"],
 input[type="radio"] {
   display: inline; }
@@ -459,7 +460,9 @@ th,
 td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #E1E1E1; }
+  border-bottom: 1px solid #E1E1E1;
+   }
+  
 th:first-child,
 td:first-child {
   padding-left: 0; }
@@ -1064,7 +1067,7 @@ header.nav-up {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width:80%;
 }
 .onepage-menu #header-wrap {
   background: #fff;
@@ -1073,7 +1076,7 @@ header.nav-up {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  width: 100%;
 }
 nav#navbar ul.menu-list {
   display: flex;

@@ -1,6 +1,4 @@
-package com.example.biz.service;
-
-import com.example.biz.user.UserVO;
+package com.example.biz.user;
 
 public interface UserService {
 

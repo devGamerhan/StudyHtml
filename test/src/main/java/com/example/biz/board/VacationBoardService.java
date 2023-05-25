@@ -1,4 +1,4 @@
-package com.example.biz.service;
+package com.example.biz.board;
 
 public interface VacationBoardService {
 
