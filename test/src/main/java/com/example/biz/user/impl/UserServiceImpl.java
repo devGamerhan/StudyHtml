@@ -1,5 +1,7 @@
 package com.example.biz.user.impl;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +22,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void insertUser(UserVO vo) {
 		userDAO.insertUser(vo);
+	}
+
+	@Override
+	public void idCheck(HttpServletResponse response, String id) {
+		userDAO.idCheck(response, id);
+		
 	}
 }

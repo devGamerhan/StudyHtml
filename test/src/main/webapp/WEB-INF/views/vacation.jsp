@@ -24,30 +24,39 @@
 		<!-- script
 		================================================== -->
 		<script src="js/modernizr.js"></script>
+		<script src="js/jquery-3.2.1.min.js"></script>
+
+		<!-- third party jQuery plugins -->
+		<script src="js/plugins.js"></script>
+		
+		<!-- custom javascript -->
+		<script src="js/script.js"></script>
 		<script src="js/button.js"></script>
 </head>
 
 <body>
+<!-- header -->
 <header id="header" class="onepage-menu fixed">
 	<div id="header-wrap">
 		<nav id="navbar">
 			<div class="main-logo">
 				<a href="index.html">A.</a>
 			</div>
-
 			<div class="main-menu" id="navigation">
 				<ul class="menu-list scrollspy-nav navbar-nav list-inline">
 					<li class="scrollspy-link"><a href="main.jsp" data-target="intro" class="nav-link smoothscroll">Home</a></li>
-					<li class="scrollspy-link"><a href="vacation.jsp" data-target="about" class="nav-link smoothscroll">휴가서</a></li>
-					<li class="scrollspy-link"><a href="#" data-target="services" class="nav-link smoothscroll">스케줄표</a></li>
-					<li class="scrollspy-link"><a href="#" data-target="testimonial" class="nav-link smoothscroll">마이페이지</a></li>
-					<li class="scrollspy-link"><a href="#" data-target="portfolio" class="nav-link smoothscroll">휴가서 관리</a></li>
-					<li class="scrollspy-link"><a href="#" data-target="contact" class="nav-link smoothscroll">스케줄표 관리</a></li>
+					<li class="scrollspy-link"><a href="vacation.do" data-target="about" class="nav-link smoothscroll">휴가서</a></li>
+					<li class="scrollspy-link"><a href="schedule.do" data-target="services" class="nav-link smoothscroll">스케줄표</a></li>
+					<li class="scrollspy-link"><a href="myPage.do" data-target="testimonial" class="nav-link smoothscroll">마이페이지</a></li>
+					<c:if test="${sessionScope.role eq '팀장'}">
+						<li class="scrollspy-link"><a href="vacationManager.do" data-target="portfolio" class="nav-link smoothscroll">휴가서 관리</a></li>
+						<li class="scrollspy-link"><a href="scheduleManager.do" data-target="contact" class="nav-link smoothscroll">스케줄표 관리</a></li>
+					</c:if>
 					<span class="scrollspy-indicator"></span>
 				</ul>
 			</div>
 		</nav>
-	</div><!--header-wrap-->
+	</div>
 </header>
 
 <c:if test="${empty sessionScope.id}">
@@ -84,13 +93,7 @@
 	</div>
 </footer>
 
-<script src="js/jquery-3.2.1.min.js"></script>
 
-<!-- third party jQuery plugins -->
-<script src="js/plugins.js"></script>
-
-<!-- custom javascript -->
-<script src="js/script.js"></script>
 
 </body>
 </html>

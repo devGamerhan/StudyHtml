@@ -5,12 +5,19 @@ public class UserVO {
 	private String password;		//비밀번호
 	private String name;			//사원이름
 	private String role;			//사원직책
+	private String team;			//소속부서
 	private String phone;			//사원연락처
 	private String phone1;			//사원연락처
 	private String phone2;			//사원연락처
 	private String phone3;			//사원연락처
 	
 	
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
 	public String getPhone1() {
 		return phone1;
 	}

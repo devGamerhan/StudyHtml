@@ -11,9 +11,15 @@
  				password=#{password}
  	</select>
  	
+ 	<select id="idCheck" resultType="com.example.biz.user.UserVO">
+ 		select *
+ 		from port_users
+ 		where id=#{id}
+ 	</select>
+ 	
  	<insert id="insertUser" parameterType="com.example.biz.user.UserVO">
  		insert
  		into port_users
- 		values(#{id},#{password},#{name},#{role},#{phone})
+ 		values(#{id},#{password},#{name},#{role},#{team},#{phone})
  	</insert>
 </mapper>

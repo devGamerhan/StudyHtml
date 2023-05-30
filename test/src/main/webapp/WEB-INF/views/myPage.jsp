@@ -2,11 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
 <!DOCTYPE html>
-<html class="no-js">
+<html>
 <head>
-		<title>main page</title>
+		<title>my page</title>
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,15 +24,15 @@
 		================================================== -->
 		<script src="js/modernizr.js"></script>
 		<script src="js/jquery-3.2.1.min.js"></script>
+
+		<!-- third party jQuery plugins -->
 		<script src="js/plugins.js"></script>
+
 		<!-- custom javascript -->
 		<script src="js/script.js"></script>
 		<script src="js/button.js"></script>
-
 </head>
-
 <body>
-
 <!-- header -->
 <header id="header" class="onepage-menu fixed">
 	<div id="header-wrap">
@@ -58,38 +57,84 @@
 		</nav>
 	</div>
 </header>
-<!-- end header -->
 
-<!-- section -->
 <c:if test="${empty sessionScope.id}">
-<section>
-	<div id="content" class="scrollspy-section padding-xlarge" style="text-align: center;">
-		<h3>LOGIN</h3>
-		<form name="loginForm">
-			<span style="margin-right: 10px">사원번호</span><input type="text" name="id" id="id"><br>
-			<span style="margin-right: 10px">비밀번호</span><input type="password" name="password" id="password"><br>
-			<input type="button" onclick="login(); return false;" value="로그인">
-			<input type="button" onclick="joinPage(); return false;" value="회원가입">
-		</form>
-	</div>
-</section>
-</c:if>
-<c:if test="${!empty sessionScope.id}">
 	<div class="scrollspy-section padding-xlarge">
-		<h3>로그인 중인 상태입니다.</h3>
-		<a href="logout.do">로그아웃</a>
+		<h3>로그인 해야합니다.</h3>
 	</div>
 </c:if>
-<!-- end section -->
 
-<!-- footer -->
+<c:if test="${!empty sessionScope.id}">
+	<section>
+		<div class="scrollspy-section padding-large">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="post-grid">
+					<div class="row">
+						<div class="col-md-6">
+							<div style="text-align: center;">
+								<h3>휴가 신청 내역</h3>
+								<table style="margin: 0 auto; text-align: center;">
+									<tr>
+										<th>번호</th>
+										<th>종류</th>
+										<th>희망기간</th>
+									</tr>
+									<c:forEach items="${vacationList}" var="vacation">
+										<tr>
+											<td>${vacation.seq}</td>
+											<td>${vacation.vacationType}</td>
+											<td>${vacation.startDate.substring(2,8)}~${vacation.endDate.substring(2,8)}</td>
+										</tr>
+									</c:forEach>
+								</table>
+								<jsp:include page="pagingMyPage.jsp">
+									<jsp:param name="page" value="${paging['page']}" />
+									<jsp:param name="totalCount" value="${paging['totalCount']}" />
+								</jsp:include>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div style="text-align: center;">
+								<h3>승인 여부</h3>
+								<table style="margin: 0 auto; text-align: center;">
+									<tr>
+										<th>번호</th>
+										<th>희망기간</th>
+										<th>승인 여부</th>
+										<th>거부 이유</th>
+									</tr>
+									<c:forEach items="${vacationList}" var="vacation">
+									<tr>
+										<td>${vacation.seq}</td>
+										<td>${vacation.startDate} ~ ${vacation.endDate}</td>
+										<td>${vacation.accept}</td>
+										<td>${vacation.reason}</td>
+									</tr>
+									</c:forEach>
+								</table>
+								<jsp:include page="pagingMyPage.jsp">
+									<jsp:param name="page" value="${paging['page']}" />
+									<jsp:param name="totalCount" value="${paging['totalCount']}" />
+								</jsp:include>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+</c:if>
+
+
 <footer>
 	<div id="footer-bottom">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="copyright">
-						<p>© 2022 Archi. All rights reserved.</p>
+						<p>© 2023 HAN GIOK. All rights reserved.</p>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -101,8 +146,5 @@
 		</div>
 	</div>
 </footer>
-<!-- end footer -->
-
-
 </body>
 </html>

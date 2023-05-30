@@ -2,13 +2,14 @@ package com.example.view;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.biz.user.UserService;
 import com.example.biz.user.UserVO;
@@ -35,6 +36,13 @@ public class UserController {
 			e.printStackTrace();
 		}
 	}
+	
+	//아이디 중복 체크
+	@GetMapping("/userIdCheck.do")
+	public void idCheck(HttpServletResponse response, HttpServletRequest request) {
+		String id = request.getParameter("param");
+		userService.idCheck(response, id);
+	}
 		
 	//로그인
 	@PostMapping("/login.do")
@@ -54,9 +62,9 @@ public class UserController {
 	}
 	
 	//로그아웃
-	@RequestMapping(value="logout.do")
+	@GetMapping("/logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:login.do";
+		return "redirect:main.jsp";
 	}
 }

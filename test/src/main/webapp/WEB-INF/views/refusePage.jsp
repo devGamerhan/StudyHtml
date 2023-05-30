@@ -2,38 +2,35 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
 <!DOCTYPE html>
-<html class="no-js">
+<html>
 <head>
-		<title>main page</title>
-		<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta name="format-detection" content="telephone=no">
-	    <meta name="apple-mobile-web-app-capable" content="yes">
-	    <meta name="author" content="">
-	    <meta name="keywords" content="">
-	    <meta name="description" content="">
+	<meta charset="UTF-8">
+	<title>vacation</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
 
-	    <link rel="stylesheet" type="text/css" href="css/normalize.css">
-	    <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
-	    <link rel="stylesheet" type="text/css" href="css/vendor.css">
-	    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-		<!-- script
-		================================================== -->
-		<script src="js/modernizr.js"></script>
-		<script src="js/jquery-3.2.1.min.js"></script>
-		<script src="js/plugins.js"></script>
-		<!-- custom javascript -->
-		<script src="js/script.js"></script>
-		<script src="js/button.js"></script>
-
+	<!-- script
+	================================================== -->
+	<script src="js/modernizr.js"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/plugins.js"></script>
+	<!-- custom javascript -->
+	<script src="js/script.js"></script>
+	<script src="js/button.js"></script>
 </head>
-
 <body>
-
 <!-- header -->
 <header id="header" class="onepage-menu fixed">
 	<div id="header-wrap">
@@ -61,25 +58,32 @@
 <!-- end header -->
 
 <!-- section -->
-<c:if test="${empty sessionScope.id}">
-<section>
-	<div id="content" class="scrollspy-section padding-xlarge" style="text-align: center;">
-		<h3>LOGIN</h3>
-		<form name="loginForm">
-			<span style="margin-right: 10px">사원번호</span><input type="text" name="id" id="id"><br>
-			<span style="margin-right: 10px">비밀번호</span><input type="password" name="password" id="password"><br>
-			<input type="button" onclick="login(); return false;" value="로그인">
-			<input type="button" onclick="joinPage(); return false;" value="회원가입">
-		</form>
-	</div>
-</section>
-</c:if>
-<c:if test="${!empty sessionScope.id}">
-	<div class="scrollspy-section padding-xlarge">
-		<h3>로그인 중인 상태입니다.</h3>
-		<a href="logout.do">로그아웃</a>
-	</div>
-</c:if>
+	<section>
+		<div class="scrollspy-section padding-large">
+			<div class="container">
+				<form name="refuseForm">
+				<table style="margin:0 auto;">
+					<tr>
+						<th>거절 사유</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="hidden" name="seq" value="${seq}">
+							<input type="hidden" name="refuse" value="X">
+							<textarea name="reason" id="reason" rows="20" cols="60"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button onclick="refuseVacationForm(); return false;">확인</button>
+							<button onclick="refuseVacationFormReset(); return false;">초기화</button>
+						</td>
+					</tr>
+				</table>
+				</form>
+			</div>
+		</div>
+	</section>
 <!-- end section -->
 
 <!-- footer -->
@@ -102,7 +106,5 @@
 	</div>
 </footer>
 <!-- end footer -->
-
-
 </body>
 </html>

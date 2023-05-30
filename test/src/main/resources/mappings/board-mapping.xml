@@ -1,1 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="VacationDAOMapper">
+	<insert id="insertVacation" parameterType="com.example.biz.board.VacationVO">
+		insert
+		into vacation (seq,team,role,vacationType,name,
+                        startDate,endDate,phone,subTeam,subRole,subName,work)
+		values(
+				(select nvl(max(seq),0)+1 from vacation),
+				#{team},#{role},#{vacationType},#{name},#{startDate},
+				#{endDate},#{phone},#{subTeam},#{subRole},#{subName},#{work}
+		)
+	</insert>
+	
+	<select id="getVacationListFromName" resultType="com.example.biz.board.VacationVO">
+		SELECT *
+		FROM   (SELECT ROWNUM AS rnum, B.*
+		        FROM   (SELECT seq,
+		                       team,
+		                       role,
+		                       vacationType,
+		                       name,
+		                       startDate,
+		                       endDate,
+		                       phone,
+		                       subTeam,
+		                       subRole,
+		                       subName,
+		                       work,
+		                       accept,
+		                       reason
+		                FROM   vacation
+		                ORDER BY seq DESC) B)
+		WHERE  rnum BETWEEN #{page}*5-4 AND #{page}*5
+		AND name=#{name}
+	</select>
+	
+	
+	<!-- select *
+		from vacation
+		order by seq desc -->
+	<select id="getVacationList" resultType="com.example.biz.board.VacationVO">
+		SELECT *
+		FROM   (SELECT ROWNUM AS rnum, B.*
+		        FROM   (SELECT seq,
+		                       team,
+		                       role,
+		                       vacationType,
+		                       name,
+		                       startDate,
+		                       endDate,
+		                       phone,
+		                       subTeam,
+		                       subRole,
+		                       subName,
+		                       work,
+		                       accept,
+		                       reason
+		                FROM   vacation
+		                ORDER BY seq DESC) B)
+		WHERE  rnum BETWEEN #{page}*5-4 AND #{page}*5
+	</select>
+	
+	<select id="vacationCount" resultType="int">
+ 		select count(*)
+ 		from vacation
+ 	</select>
+	
+	<select id="getVacation" resultType="com.example.biz.board.VacationVO">
+		select *
+		from vacation
+		where seq=#{seq}
+	</select>
+	
+	<update id="confirmVacation" parameterMap="confirmParameter">
+		update vacation set accept=#{accept} where seq=#{seq}
+	</update>
+	
+	<update id="refuseVacation" parameterMap="refuseParameter">
+		update vacation set accept=#{refuse},reason=#{reason} where seq=#{seq}
+	</update>
+	
+	
+	
+	
+	<parameterMap  type="com.example.biz.util.ConfirmParameter" id="confirmParameter">
+		<parameter property="seq"/>
+		<parameter property="accept"/>
+	</parameterMap>
+	
+	<parameterMap type="com.example.biz.util.RefuseParameter" id="refuseParameter">
+		<parameter property="seq"/>
+		<parameter property="refuse"/>
+		<parameter property="reason"/>
+	</parameterMap>
+</mapper>
