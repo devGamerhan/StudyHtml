@@ -140,3 +140,16 @@ function refuseVacationForm(){
 function refuseVacationFormReset(){
     document.refuseVacationForm.reset();
 }
+
+
+//스케줄 등록
+function inputSchedule(){
+    document.scheduleForm.method="post";
+    document.scheduleForm.action = "insertSchedule.do";
+    document.scheduleForm.submit();
+}
+
+//스케줄 등록 폼 초기화
+function inputScheduleReset(){
+    document.scheduleForm.reset();
+}
