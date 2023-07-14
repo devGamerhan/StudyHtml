@@ -22,7 +22,7 @@
 			<input type="text" name="id" id="id">
 			<button onclick="idCheck();return false;">중복확인</button>
 			
-			<label for="pw">비밀번호<br>(8~16자의 영어,숫자,특수문자 필수)</label>
+			<label for="pw">비밀번호<br>(8~16자의 영어 대문자,소문자,숫자,특수문자 필수)</label>
 			<input type="password" name="password" id="password">
 			
 			<label for="name">이름</label>
