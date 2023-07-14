@@ -75,7 +75,7 @@
 	</select>
 	
 	<update id="confirmVacation" parameterMap="confirmParameter">
-		update vacation set accept=#{accept} where seq=#{seq}
+		update vacation set accept=#{accept}, reason=null where seq=#{seq}
 	</update>
 	
 	<update id="refuseVacation" parameterMap="refuseParameter">
