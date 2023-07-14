@@ -156,7 +156,6 @@
 				 }
 			}
 			
-			
 			// today 에서 +1개월
 			function nextCalendar(){
 				today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
