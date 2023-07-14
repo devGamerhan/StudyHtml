@@ -124,7 +124,7 @@
 				  	calendarTable.deleteRow(calendarTable.rows.length -1);
 				}
 				
-				row = calendarTable.insertRow();								//table에 행(tr) 추가하기
+				row = calendarTable.insertRow();									//table에 행(tr) 추가하기
 				
 			  	for(var i = 0; i < firstDate.getDay(); i++){
 			  		var cell = row.insertCell();
