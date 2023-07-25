@@ -6,5 +6,6 @@
   <mappers>
 	<mapper resource="mappings/board-mapping.xml" />
   	<mapper resource="mappings/user-mapping.xml" />
+  	<mapper resource="mappings/schedule-mapping.xml" />
   </mappers>
 </configuration>

@@ -43,8 +43,8 @@
 				<a href="index.html">A.</a>
 			</div>
 			<div class="main-menu" id="navigation">
-				<ul class="menu-list scrollspy-nav navbar-nav list-inline">
-					<li class="scrollspy-link"><a href="main.jsp" data-target="intro" class="nav-link smoothscroll">Home</a></li>
+				<ul class="menu-list navbar-nav list-inline">
+					<li class="scrollspy-link"><a href="main.do" data-target="intro" class="nav-link smoothscroll">Home</a></li>
 					<li class="scrollspy-link"><a href="vacation.do" data-target="about" class="nav-link smoothscroll">휴가서</a></li>
 					<li class="scrollspy-link"><a href="schedule.do" data-target="services" class="nav-link smoothscroll">스케줄표</a></li>
 					<li class="scrollspy-link"><a href="myPage.do" data-target="testimonial" class="nav-link smoothscroll">마이페이지</a></li>

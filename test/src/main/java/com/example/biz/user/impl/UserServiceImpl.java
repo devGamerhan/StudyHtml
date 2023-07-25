@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
 		userDAO.idCheck(response, id);
 		
 	}
+
+	@Override
+	public UserVO getMain(String id) {
+		return userDAO.getMain(id);
+	}
 }

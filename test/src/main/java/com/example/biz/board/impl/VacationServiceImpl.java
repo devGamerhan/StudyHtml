@@ -39,13 +39,11 @@ public class VacationServiceImpl implements VacationService {
 
 	@Override
 	public void confirmVacation(int seq, String accept) {
-		// TODO Auto-generated method stub
 		vacationDAO.confirmVacation(seq, accept);
 	}
 
 	@Override
 	public void refuseVacation(int seq, String accept, String reason) {
-		// TODO Auto-generated method stub
 		vacationDAO.refuseVacation(seq, accept, reason);
 	}
 

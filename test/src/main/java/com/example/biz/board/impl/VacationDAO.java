@@ -47,13 +47,38 @@ public class VacationDAO {
 	}
 
 	public void confirmVacation(int seq, String accept) {
-		ConfirmParameter vo = new ConfirmParameter(seq, accept);
-		mybatis.update("VacationDAOMapper.confirmVacation",vo);
+		VacationVO vo = mybatis.selectOne("VacationDAOMapper.getVacation", seq);
+		System.out.println(vo.getName());
+		if(!vo.getAccept().equals("O")) {
+			if(vo.getVacationType().equals("연차")) {
+				mybatis.update("UserDAOMapper.minusVacationYear",vo);
+			}else if(vo.getVacationType().equals("병가")) {
+				mybatis.update("UserDAOMapper.minusVacationSick",vo);
+			}else {
+				mybatis.update("UserDAOMapper.plusVacationOther",vo);
+			}
+		}
+		
+		ConfirmParameter vo2 = new ConfirmParameter(seq, accept);
+		mybatis.update("VacationDAOMapper.confirmVacation",vo2);
+		
 	}
 	
 	public void refuseVacation(int seq, String refuse, String reason) {
-		RefuseParameter vo = new RefuseParameter(seq, refuse, reason);
-		mybatis.update("VacationDAOMapper.refuseVacation",vo);
+		VacationVO vo = mybatis.selectOne("VacationDAOMapper.getVacation", seq);
+		
+		if(!vo.getAccept().equals("X") && !vo.getAccept().isBlank()) {
+			if(vo.getVacationType().equals("연차")) {
+				mybatis.update("UserDAOMapper.plusVacationYear",vo);
+			}else if(vo.getVacationType().equals("병가")) {
+				mybatis.update("UserDAOMapper.plusVacationSick",vo);
+			}else {
+				mybatis.update("UserDAOMapper.minusVacationOther",vo);
+			}
+		}
+		
+		RefuseParameter vo2 = new RefuseParameter(seq, refuse, reason);
+		mybatis.update("VacationDAOMapper.refuseVacation",vo2);
 	}
 	
 	//페이징 처리

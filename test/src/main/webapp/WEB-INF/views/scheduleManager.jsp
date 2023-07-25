@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.example.biz.board.ScheduleVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
@@ -117,6 +118,18 @@
 				var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);		// 현재 달력의 첫날
 				var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0);	// 현재 달력의 마지막날
 				
+				
+				
+				//서버에서 받아온 스케줄 리스트를 자바스크립트 변수에 대입
+				var sList = new Array();
+				
+				<c:forEach items="${scheduleList}" var="schedule">
+					sList.push({"scheduleName":"${schedule.scheduleName}",
+								"choiceColor":"${schedule.choiceColor}",
+								"startDate":"${schedule.startDate}",
+								"endDate":"${schedule.endDate}"});
+	   			</c:forEach>
+				
 				/*	작성 테이블 미리 초기화
 				*	타이틀, 일~월 까지의 표시는 남기기 위해 3행부터 삭제
 				*/
@@ -126,7 +139,7 @@
 				
 				row = calendarTable.insertRow();									//table에 행(tr) 추가하기
 				
-			  	for(var i = 0; i < firstDate.getDay(); i++){
+			  	for(var i = 0; i < firstDate.getDay(); i++){						// 시작일 전까지 빈 칸
 			  		var cell = row.insertCell();
 			  		cnt += 1;
 			  	}
@@ -138,7 +151,38 @@
 				    cell.setAttribute('id', i);										//속성 id값에 해당 날짜 숫자
 				  	cell.innerHTML = i;
 				  	cell.align = "center";
-
+					
+				 	// 스케줄 있으면 색칠하기 위한 for문
+			  		for(var j=0; j<sList.length; j++){		
+			  			var startDay = sList[j].startDate.substring(6,8);
+			  			var endDay = sList[j].endDate.substring(6,8);
+			  			var startMonth = sList[j].startDate.substring(4,6);
+			  			var endMonth = sList[j].endDate.substring(4,6);
+			  			
+			  			// 0 붙은거 제거
+			  			if(startDay.substring(0,1) == "0"){								
+			  				startDay = startDay.substring(1,2);
+			  			}
+			  			if(endDay.substring(0,1) == "0"){								
+			  				endDay = endDay.substring(1,2);
+			  			}
+			  			if(startMonth.substring(0,1) == "0"){							
+			  				startMonth = startMonth.substring(1,2);
+			  			}
+			  			if(endMonth.substring(0,1) == "0"){							
+			  				endMonth = endMonth.substring(1,2);
+			  			}
+			  			
+			  			// 시작일이 오늘보다 빠르거나 같고, 종료일이 오늘보다 나중이거나 같으면
+			  			if(
+			  					((startMonth*100)+(startDay*1) <= ((today.getMonth()+1)*100)+i)
+			  					&& ((endMonth*100)+(endDay*1) >= ((today.getMonth()+1)*100)+i)
+			  			){
+			  				cell.style.backgroundColor = sList[j].choiceColor;		//해당 셀 배경색 변경
+			  			}
+			  			
+		   			}//end for
+				  		
 				    if (cnt % 7 == 1) {
 				    	cell.innerHTML = "<font color=#F79DC2>" + i + "</font>";	//td에 해당 날짜 숫자 입력
 				    }
@@ -147,14 +191,14 @@
 				    	cell.innerHTML = "<font color=skyblue>" + i + "</font>";
 				    	row = calendar.insertRow();
 				    }
-				 }
+				 }//end for
 
 				 if(cnt % 7 != 0){													// 입력 후 공간이 남으면 빈 칸으로 채우기
 				  	for(i = 0; i < 7 - (cnt % 7); i++){
 				  		cell = row.insertCell();
 				  	}
 				 }
-			}
+			}//end build
 			
 			// today 에서 +1개월
 			function nextCalendar(){
@@ -167,6 +211,7 @@
 				buildCalendar();
 			}
 		</script>
+		
 </head>
 <body>
 <!-- header -->
@@ -178,8 +223,8 @@
 			</div>
 
 			<div class="main-menu" id="navigation">
-				<ul class="menu-list scrollspy-nav navbar-nav list-inline">
-					<li class="scrollspy-link"><a href="main.jsp" data-target="intro" class="nav-link smoothscroll">Home</a></li>
+				<ul class="menu-list navbar-nav list-inline">
+					<li class="scrollspy-link"><a href="main.do" data-target="intro" class="nav-link smoothscroll">Home</a></li>
 					<li class="scrollspy-link"><a href="vacation.do" data-target="about" class="nav-link smoothscroll">휴가서</a></li>
 					<li class="scrollspy-link"><a href="schedule.do" data-target="services" class="nav-link smoothscroll">스케줄표</a></li>
 					<li class="scrollspy-link"><a href="myPage.do" data-target="testimonial" class="nav-link smoothscroll">마이페이지</a></li>
@@ -225,6 +270,7 @@
 						</tr>
 					</table>
 					<script type="text/javascript">buildCalendar();</script>
+					
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">

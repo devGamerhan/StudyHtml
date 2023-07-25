@@ -45,7 +45,7 @@ public class VacationController {
 		
 		try {
 			PrintWriter out = response.getWriter();
-			out.print("<script>alert('등록되었습니다.'); location.href='main.jsp';</script>");
+			out.print("<script>alert('등록되었습니다.'); location.href='main.do';</script>");
 			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();

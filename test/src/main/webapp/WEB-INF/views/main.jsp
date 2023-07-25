@@ -41,10 +41,9 @@
 			<div class="main-logo">
 				<a href="index.html">A.</a>
 			</div>
-
 			<div class="main-menu" id="navigation">
-				<ul class="menu-list scrollspy-nav navbar-nav list-inline">
-					<li class="scrollspy-link"><a href="main.jsp" data-target="intro" class="nav-link smoothscroll">Home</a></li>
+				<ul class="menu-list navbar-nav list-inline">
+					<li class="scrollspy-link"><a href="main.do" data-target="intro" class="nav-link smoothscroll">Home</a></li>
 					<li class="scrollspy-link"><a href="vacation.do" data-target="about" class="nav-link smoothscroll">휴가서</a></li>
 					<li class="scrollspy-link"><a href="schedule.do" data-target="services" class="nav-link smoothscroll">스케줄표</a></li>
 					<li class="scrollspy-link"><a href="myPage.do" data-target="testimonial" class="nav-link smoothscroll">마이페이지</a></li>
@@ -75,8 +74,26 @@
 </section>
 </c:if>
 <c:if test="${!empty sessionScope.id}">
-	<div class="scrollspy-section padding-xlarge">
-		<h3>로그인 중인 상태입니다.</h3>
+	<div class="scrollspy-section padding-xlarge" style="text-align: center;">
+		<h3>${sessionScope.name} 님 로그인 중인 상태입니다.</h3>
+		<table style="margin: auto;">
+			<tr>
+				<th>소속팀</th>
+				<th>직위</th>
+				<th>연차 잔여량</th>
+				<th>병가 잔여량</th>
+				<th>그 외 사용량</th>
+				<th>연차 사용률</th>
+			</tr>
+			<tr>
+				<td>${sessionScope.team}</td>
+				<td>${sessionScope.role}</td>
+				<td>${user.vacationYear}</td>
+				<td>${user.vacationSick}</td>
+				<td>${user.vacationOther}</td>
+				<td>${user.usedVacationByPer}%</td>
+			</tr>
+		</table>
 		<a href="logout.do">로그아웃</a>
 	</div>
 </c:if>

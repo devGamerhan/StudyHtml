@@ -53,4 +53,8 @@ public class UserDAO {
 		}
 		
 	}
+
+	public UserVO getMain(String id) {
+		return mybatis.selectOne("UserDAOMapper.getMain", id);
+	}
 }

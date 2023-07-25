@@ -22,32 +22,15 @@
 			</tr>
 			<tr>
 				<th>소속</th>
-				<td>
-					<select name="team" id="team">
-						<option selected="selected">개발1팀</option>
-						<option>개발2팀</option>
-						<option>총무팀</option>
-						<option>영업1팀</option>
-						<option>영업2팀</option>
-					</select>
-				</td>
+				<td><input type="text" name="team" readonly="readonly" value="${sessionScope.team}"></td>
 				<th>직위</th>
-				<td>
-					<select name="role" id="role">
-						<option selected="selected">사원</option>
-						<option>주임</option>
-						<option>대리</option>
-						<option>과장</option>
-						<option>팀장</option>
-					</select>
-				</td>
+				<td><input type="text" name="role" readonly="readonly" value="${sessionScope.role}"></td>
 			</tr>
 			<tr>
 				<th>휴가 종류</th>
 				<td>
 				<select name="vacationType">
 					<option selected="selected">연차</option>
-					<option>월차</option>
 					<option>경조</option>
 					<option>공가</option>
 					<option>병가</option>
@@ -57,7 +40,7 @@
 				</select>
 				</td>
 				<th>이름</th>
-				<td><input name="name" type="text" value="${sessionScope.name}"></td>
+				<td><input name="name" readonly="readonly" type="text" value="${sessionScope.name}"></td>
 			</tr>
 			<tr>
 				<th colspan="4" style="text-align: center;">희망 기간</th>

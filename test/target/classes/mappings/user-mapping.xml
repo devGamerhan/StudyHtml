@@ -11,15 +11,63 @@
  				password=#{password}
  	</select>
  	
+ 	<select id="getMain" resultType="com.example.biz.user.UserVO">
+ 		select id, password, name, role, team, phone, vacationYear, vacationSick, vacationOther, round(((15-vacationYear)/15)*100,2) as usedVacationByPer
+ 		from port_users
+ 		where id=#{id}
+ 	</select>
+ 	
  	<select id="idCheck" resultType="com.example.biz.user.UserVO">
  		select *
  		from port_users
  		where id=#{id}
  	</select>
  	
+ 	<select id="usedVacationByPer" resultType="com.example.biz.user.UserVO">
+ 		select ((vacationYear-15)/15)*100 as usedVacationByPer
+		from port_users
+		where id=#{id}
+ 	</select>
+ 	
  	<insert id="insertUser" parameterType="com.example.biz.user.UserVO">
  		insert
- 		into port_users
+ 		into port_users (id,password,name,role,team,phone)
  		values(#{id},#{password},#{name},#{role},#{team},#{phone})
  	</insert>
+ 	
+ 	<update id="minusVacationYear" parameterType="com.example.biz.board.VacationVO"> 
+ 		update port_users
+ 		set vacationYear=vacationYear-1
+ 		where name=#{name}
+ 	</update>
+ 	
+ 	<update id="plusVacationYear" parameterType="com.example.biz.board.VacationVO"> 
+ 		update port_users
+ 		set vacationYear=vacationYear+1
+ 		where name=#{name}
+ 	</update>
+ 	
+ 	<update id="minusVacationSick" parameterType="com.example.biz.board.VacationVO"> 
+ 		update port_users
+ 		set vacationSick=vacationSick-1
+ 		where name=#{name}
+ 	</update>
+ 	
+ 	<update id="plusVacationSick" parameterType="com.example.biz.board.VacationVO"> 
+ 		update port_users
+ 		set vacationSick=vacationSick+1
+ 		where name=#{name}
+ 	</update>
+ 	
+ 	<update id="plusVacationOther" parameterType="com.example.biz.board.VacationVO"> 
+ 		update port_users
+ 		set vacationOther=vacationOther+1
+ 		where name=#{name}
+ 	</update>
+ 	
+ 	<update id="minusVacationOther" parameterType="com.example.biz.board.VacationVO"> 
+ 		update port_users
+ 		set vacationOther=vacationOther-1
+ 		where name=#{name}
+ 	</update>
 </mapper>

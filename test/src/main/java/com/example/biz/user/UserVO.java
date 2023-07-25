@@ -6,12 +6,44 @@ public class UserVO {
 	private String name;			//사원이름
 	private String role;			//사원직책
 	private String team;			//소속부서
+	
 	private String phone;			//사원연락처
 	private String phone1;			//사원연락처
 	private String phone2;			//사원연락처
 	private String phone3;			//사원연락처
 	
+	private int vacationYear;		//연차
+	private int vacationSick;		//병가
+	private int vacationOther;		//그 외
 	
+	private String usedVacationByPer;//연차 소화율
+	
+	
+	
+	public String getUsedVacationByPer() {
+		return usedVacationByPer;
+	}
+	public void setUsedVacationByPer(String usedVacationByPer) {
+		this.usedVacationByPer = usedVacationByPer;
+	}
+	public int getVacationYear() {
+		return vacationYear;
+	}
+	public void setVacationYear(int vacationYear) {
+		this.vacationYear = vacationYear;
+	}
+	public int getVacationSick() {
+		return vacationSick;
+	}
+	public void setVacationSick(int vacationSick) {
+		this.vacationSick = vacationSick;
+	}
+	public int getVacationOther() {
+		return vacationOther;
+	}
+	public void setVacationOther(int vacationOther) {
+		this.vacationOther = vacationOther;
+	}
 	public String getTeam() {
 		return team;
 	}

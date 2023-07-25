@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ScheduleDAOMapper">
+	<insert id="insertSchedule" parameterType="com.example.biz.board.ScheduleVO">
+		insert into schedule 
+		values (#{scheduleName}, #{choiceColor}, #{startDate}, #{endDate})
+	</insert>
+	
+	<select id="getScheduleList" resultType="com.example.biz.board.ScheduleVO">
+		select *
+		from schedule
+	</select>
+</mapper>
