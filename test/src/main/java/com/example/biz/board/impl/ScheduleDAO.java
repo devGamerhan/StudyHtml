@@ -19,17 +19,17 @@ public class ScheduleDAO {
 	}
 
 	public ScheduleVO getSchedule(ScheduleVO vo) {
-		return mybatis.selectOne("");
+		return mybatis.selectOne("ScheduleDAOMapper.getSchedule",vo);
 	}
 	public List<ScheduleVO> getScheduleList() {
 		return mybatis.selectList("ScheduleDAOMapper.getScheduleList");
 	}
 
 	public void updateSchedule(ScheduleVO vo) {
-		
+		mybatis.update("ScheduleDAOMapper.updateSchedule",vo);
 	}
 
 	public void deleteSchedule(ScheduleVO vo) {
-		
+		mybatis.delete("ScheduleDAOMapper.deleteSchedule",vo);
 	}
 }

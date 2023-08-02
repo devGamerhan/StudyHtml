@@ -8,8 +8,25 @@
 		values (#{scheduleName}, #{choiceColor}, #{startDate}, #{endDate})
 	</insert>
 	
+	<update id="updateSchedule" parameterType="com.example.biz.board.ScheduleVO">
+		update schedule
+		set scheduleName=#{scheduleName}, startDate=#{startDate}, endDate=#{endDate}
+		where choiceColor=#{choiceColor}
+	</update>
+	
+	<delete id="deleteSchedule" parameterType="com.example.biz.board.ScheduleVO">
+		delete from schedule
+		where choiceColor=#{choiceColor}
+	</delete>
+	
 	<select id="getScheduleList" resultType="com.example.biz.board.ScheduleVO">
 		select *
 		from schedule
+	</select>
+	
+	<select id="getSchedule" parameterType="com.example.biz.board.ScheduleVO" resultType="com.example.biz.board.ScheduleVO">
+		select *
+		from schedule
+		where choiceColor=#{choiceColor}
 	</select>
 </mapper>

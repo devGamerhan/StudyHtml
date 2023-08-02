@@ -153,3 +153,15 @@ function inputSchedule(){
 function inputScheduleReset(){
     document.scheduleForm.reset();
 }
+
+//스케줄 업데이트
+function updateSchedule(){
+	document.scheduleForm.method="post";
+    document.scheduleForm.action = "updateSchedule.do";
+    document.scheduleForm.submit();
+}
+
+//뒤로가기
+function back(){
+	window.history.back();
+}

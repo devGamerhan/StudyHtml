@@ -35,76 +35,7 @@
   
   		<!-- custom script
   		================================================== -->
-  		<script>
-		    $(document).ready( function() {
-		
-		      $('#choiceColor').each( function() {
-		        $(this).minicolors({
-		          control: $(this).attr('data-control') || 'hue',
-		          defaultValue: $(this).attr('data-defaultValue') || '',
-		          format: $(this).attr('data-format') || 'hex',
-		          keywords: $(this).attr('data-keywords') || '',
-		          inline: $(this).attr('data-inline') === 'true',
-		          letterCase: $(this).attr('data-letterCase') || 'lowercase',
-		          opacity: $(this).attr('data-opacity'),
-		          position: $(this).attr('data-position') || 'bottom',
-		          swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
-		          change: function(hex, opacity) {
-		            var log;
-		            try {
-		              log = hex ? hex : 'transparent';
-		              if( opacity ) log += ', ' + opacity;
-		              console.log(log);
-		            } catch(e) {}
-		          },
-		          theme: 'default'
-		        }); //end minicolors
-		      }); //end each
-		    }); // end ready
-		 </script>
-		<script>
-	    	$(document).ready(function () {
-	            $.datepicker.setDefaults($.datepicker.regional['ko']); 
-	            $( "#startDate" ).datepicker({
-	                 changeMonth: true, 
-	                 changeYear: true,
-	                 nextText: '다음 달',
-	                 prevText: '이전 달',
-	                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-	                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-	                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	                 dateFormat: "yymmdd",
-	                 minDate: 0,
-	                 maxDate: 365,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-	                 onClose: function( selectedDate ) {    
-	                      //시작일(startDate) datepicker가 닫힐때
-	                      //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-	                     $("#endDate").datepicker( "option", "minDate", selectedDate );
-	                 }    
-	 
-	            });
-	            $( "#endDate" ).datepicker({
-	                 changeMonth: true, 
-	                 changeYear: true,
-	                 nextText: '다음 달',
-	                 prevText: '이전 달', 
-	                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-	                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-	                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	                 dateFormat: "yymmdd",
-	                 minDate: 0,
-	                 maxDate: 365,                       // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-	                 onClose: function( selectedDate ) {    
-	                     // 종료일(endDate) datepicker가 닫힐때
-	                     // 시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-	                     $("#startDate").datepicker( "option", "maxDate", selectedDate );
-	                 }    
-	 
-	            });    
-	    	});
-		</script>
+
 		<script>
 			var today = new Date();		// 오늘 기준의 날짜 데이터
 			
@@ -133,32 +64,30 @@
 				/*	작성 테이블 미리 초기화
 				*	타이틀, 일~월 까지의 표시는 남기기 위해 3행부터 삭제
 				*/
-				while(calendarTable.rows.length > 2){
+				while(calendarTable.rows.length > 1){
 				  	calendarTable.deleteRow(calendarTable.rows.length -1);
 				}
 				
-				row = calendarTable.insertRow();									//table에 행(tr) 추가하기
-				
-			  	for(var i = 0; i < firstDate.getDay(); i++){						// 시작일 전까지 빈 칸
-			  		var cell = row.insertCell();
-			  		cnt += 1;
-			  	}
-				
-				for(i = 1; i <= lastDate.getDate(); i++){
-				  	cell = row.insertCell();										//table에 열(td) 추가하기
-				  	cnt += 1;
-
-				    cell.setAttribute('id', i);										//속성 id값에 해당 날짜 숫자
-				  	cell.innerHTML = i;
-				  	cell.align = "center";
+				// 스케줄 만큼 반복
+				for(var j=0; j<sList.length; j++){
+					var scheduleName = sList[j].scheduleName;
+		  			var startDay = sList[j].startDate.substring(6,8);
+		  			var endDay = sList[j].endDate.substring(6,8);
+		  			var startMonth = sList[j].startDate.substring(4,6);
+		  			var endMonth = sList[j].endDate.substring(4,6);
+		  			
+					row = calendarTable.insertRow();									//table에 행(tr) 추가하기
+					var cell = row.insertCell();
+					cell.innerHTML = sList[j].scheduleName;
 					
-				 	// 스케줄 있으면 색칠하기 위한 for문
-			  		for(var j=0; j<sList.length; j++){		
-			  			var startDay = sList[j].startDate.substring(6,8);
-			  			var endDay = sList[j].endDate.substring(6,8);
-			  			var startMonth = sList[j].startDate.substring(4,6);
-			  			var endMonth = sList[j].endDate.substring(4,6);
-			  			
+					for(i = 1; i <= lastDate.getDate(); i++){
+					  	cell = row.insertCell();										//table에 열(td) 추가하기
+					  	cnt += 1;
+
+					    cell.setAttribute('id', i);										//속성 id값에 해당 날짜 숫자
+					  	cell.innerHTML = i;
+					  	cell.align = "center";
+
 			  			// 0 붙은거 제거
 			  			if(startDay.substring(0,1) == "0"){								
 			  				startDay = startDay.substring(1,2);
@@ -180,24 +109,8 @@
 			  			){
 			  				cell.style.backgroundColor = sList[j].choiceColor;		//해당 셀 배경색 변경
 			  			}
-			  			
-		   			}//end for
-				  		
-				    if (cnt % 7 == 1) {
-				    	cell.innerHTML = "<font color=#F79DC2>" + i + "</font>";	//td에 해당 날짜 숫자 입력
-				    }
-
-				    if (cnt % 7 == 0){												//7일 단위로 끊어서 tr 추가
-				    	cell.innerHTML = "<font color=skyblue>" + i + "</font>";
-				    	row = calendar.insertRow();
-				    }
-				 }//end for
-
-				 if(cnt % 7 != 0){													// 입력 후 공간이 남으면 빈 칸으로 채우기
-				  	for(i = 0; i < 7 - (cnt % 7); i++){
-				  		cell = row.insertCell();
-				  	}
-				 }
+					 }//end for
+				}//end schedule list
 			}//end build
 			
 			// today 에서 +1개월
@@ -211,7 +124,11 @@
 				buildCalendar();
 			}
 		</script>
-		
+		<style type="text/css">
+			td{
+				padding:10px 7px;
+			}
+		</style>
 </head>
 <body>
 <!-- header -->
@@ -250,62 +167,35 @@
 </c:if>
 <c:if test="${!empty sessionScope.id}">
 	<div class="scrollspy-section padding-xlarge">
-		<div class="container">
+		<div class="container">		<!-- style="margin:0;" -->
 			<div class="row">
-				<div class="col-md-6">
-					<table id="calendar">
+				<div class="col-md-12">
+					<table id="calendar" style="border-collapse:collapse;">
 						<tr>
 							<td align="center"><label onclick="prevCalendar()"> ◀ </label></td>
-							<td colspan="5" id="calendarTitle" style="text-align: center;">yyyy년 m월</td>
+							<td colspan="30" id="calendarTitle" style="text-align: center;">yyyy년 m월</td>
 							<td align="center"><label onclick="nextCalendar()"> ▶ </label></td>
-						</tr>
-						<tr>
-							<td align="center"><font color ="#F79DC2">일</font></td>
-							<td align="center">월</td>
-							<td align="center">화</td>
-							<td align="center">수</td>
-							<td align="center">목</td>
-							<td align="center">금</td>
-							<td align="center"><font color ="skyblue">토</font></td>
 						</tr>
 					</table>
 					<script type="text/javascript">buildCalendar();</script>
 				</div>
 				
 				<div class="col-md-6">
-					<div class="form-group">
-						<form name="scheduleForm">
-							<label>스케줄 이름</label>
-							<input type="text" id="scheduleName" name="scheduleName" placeholder="어떤 스케줄인가요?">
-						    <label for="choiceColor">색상 선택</label>
-						    <input type="text" id="choiceColor" name="choiceColor">
-							<label>날짜 선택</label>
-							시작일 <input type="text" name="startDate" id="startDate"><br>
-							종료일 <input type="text" name="endDate" id="endDate"><br>
-							<button onclick="inputSchedule(); return false;">등록</button>
-							<button onclick="inputScheduleReset(); return false;">취소</button>
-						</form>
-					</div>
 					<table id="scheduleTable">
 						<tr>
 							<th>색상</th>
 							<th>스케줄명</th>
 							<th>기간</th>
-							<th>수정</th>
-							<th>삭제</th>
 						</tr>
 						<c:forEach items="${scheduleList}" var="schedule">
 						<tr>
 							<td style="background-color:${schedule.choiceColor}"></div></td>
 							<td>${schedule.scheduleName}</td>
 							<td>${schedule.startDate}~${schedule.endDate}</td>
-							<td><a href="getSchedule.do?choiceColor=${schedule.choiceColor.substring(1)}">수정</a></td>
-							<td><a href="deleteSchedulePage.do?choiceColor=${schedule.choiceColor.substring(1)}">삭제</a></td>
 						</tr>
 						</c:forEach>
 					</table>
 				</div>
-	
 			</div>	
 		</div>
 	</div>
